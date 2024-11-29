@@ -1,0 +1,21 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL") // e.g. "postgresql://user:password@localhost:5432/mydb"
+}
+
+model Workflow {
+    id          String   @id @default(cuid())
+    userId      String
+    name        String
+    description String?
+    definition  String
+    status      String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@unique([name, userId])
+}

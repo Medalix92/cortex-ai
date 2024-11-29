@@ -1,3 +1,5 @@
+import AppProviders from "@/components/providers/AppProviders";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -15,8 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider afterSignOutUrl={"/sign-in"}>
+      <html lang="en">
+        <body className={inter.className}>
+          <AppProviders>{children}</AppProviders>O
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
